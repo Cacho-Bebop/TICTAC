@@ -58,7 +58,7 @@ def playing(p1_sim, p2_sim):
             first_game = False
             
             # comprobamos si ya gano.
-            if counter == 6 or counter == 9:
+            if counter >= 3:
                 if winner(p1_selections) == True:
                     
                         who_win = 1
@@ -73,7 +73,7 @@ def playing(p1_sim, p2_sim):
             fetch_field_and_fill(p1_selections, p2_selections, p1_sim, p2_sim,first_game)
             
             # comprobamos si ya gano. 
-            if counter == 6 or counter == 9:
+            if counter >= 3:
                 
                 if winner(p2_selections) == True:
                     
@@ -83,11 +83,13 @@ def playing(p1_sim, p2_sim):
             
         if who_win == 1 or who_win == 2:
             
+            counter = 9
             show_winner(who_win)
             ask = 1
         
         elif who_win == 0 and (counter == 9):
             
+            counter = 9
             print("Empate")
             ask = 1
             
@@ -195,24 +197,27 @@ def winner(selections):
         # -> horizontal lines
         # 1 2 3 - 4 5 6 - 7 8 9   
    
-    if selections[0] == 1 or selections[0] == 4 or selections[0] == 7:
-        
-        if (selections[1] == selections[0] + 1) and (selections[2] == selections[1] + 1):
-            
+    if selections[0] == 1 and selections[1] == 2 and selections[2] == 3:
             return True
     
+    elif selections[0] == 4 and selections[1] == 5 and selections[2] == 6:
+        return True
+    
+    elif selections[0] == 7 and selections[1] == 8 and selections[2] == 9:
+        return True
     # -> vertical lines
     # 1 4 7 - 2 5 8 - 3 6 9 
-    elif selections[1] == selections[0] + 3:
-        
-        if ( selections[2] == selections[1] + 3 ):    
-            
-            return True
+    elif selections[0] == 1 and selections[1] == 4 and selections[2] == 7:
+        return True
+
+    elif selections[0] == 2 and selections[1] == 5 and selections[2] == 8:
+        return True
     
+    elif selections[0] == 3 and selections[1] == 6 and selections[2] == 9:
+        return True
     # -> diagonals 
     # 1 5 9 - 3 5 7
-    # ! ERROR  in diagonals, correct the logic.
-    
+   
     elif (selections[0] == 1 and selections[1] == 5 and selections[2] == 9) or (selections[0] == 3 and selections[1] == 5 and selections[2] == 7):
         
         return True
