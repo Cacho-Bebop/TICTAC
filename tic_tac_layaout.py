@@ -50,8 +50,9 @@ def playing(p1_sim, p2_sim):
             turn = 2
             first_game = False
             
-            if counter_2 == 3:
-                
+            
+            if counter_1 == 3:
+                print("\nCheckeamos si 1 gano.")               
                 if winner(p1_selections) == True:
                     
                     who_win = 1
@@ -74,13 +75,24 @@ def playing(p1_sim, p2_sim):
             turn = 1
             
             
-        if (counter_1 == 3 and counter_2 == 3) and who_win == 0:
+        if who_win == 1 or who_win == 2:
             
-            print("\nEmpate\nQuieres seguir jugando?[ Y: seguir jugando/ N or other character: terminar juego]\n")
+            show_winner(who_win)
+            ask = 1
+        
+        elif who_win == 0 and (counter_1 == 3 or counter_2 == 3):
+            
+            print("Empate")
+            ask = 1
+            
+            
+        if (counter_1 == 3 or counter_2 == 3) and ask:
+            
+            print("\n\nQuieres seguir jugando?[ Y: seguir jugando/ N or other character: terminar juego]\n")
 
             stay = input("> ")
             
-            if(stay == 'Y'):
+            if(stay.casefold() == 'Y'.casefold()):
                 
                 inp_p1 = 0
     
@@ -107,9 +119,7 @@ def playing(p1_sim, p2_sim):
             
                 keep_playing = False
         
-        elif who_win == 1 or who_win == 2:
-            
-            show_winner(who_win)
+    
             
 def validation(field, filled_fields):
 
