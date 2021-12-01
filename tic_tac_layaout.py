@@ -21,72 +21,77 @@ def playing(p1_sim, p2_sim):
     
     inp_p2 = 0
     
-    counter_1 = 0
-    counter_2 = 0
-    ### guardamos las selecciones de los jugadores
+    
+    counter   = 0 # contador de vueltas del loop
+    
     p1_selections = [] 
     
     p2_selections = []
     
-    turn = 1
+    turn = 1 # empezamos con el turno 1 
     
     # fields = [1,2,3,4,5,6,7,8,9] # structure index based 
-    filled_fields = []
+    filled_fields = [] # lista de campos ya llenos
     
-    who_win = 0
+    who_win = 0 # variable que controla el jugador que ganò 0 empate | 1 p1 | 2 p2
     
-    first_game  =   True
+    first_game  =   True # ? variable a utilizar para determinar si el juego recien comienza o no
+    
     while keep_playing:
         
+        counter += 1
         # turn based input:
-        if turn == 1 and who_win == 0:
+        if turn == 1 and who_win == 0 :
             
             print("\nTurno de jugador 1")
-            counter_1 += 1
-            x = (recibir_campo(turn, filled_fields))
-            p1_selections.append(int(x))
-            filled_fields.append(int(x))
-            fetch_field_and_fill(p1_selections, p2_selections, p1_sim, p2_sim,first_game)
+      
+            
+            x = (recibir_campo(turn, filled_fields)) #  ask user an input, puts in a not filled field
+            
+            p1_selections.append(int(x)) #  pone la seleccion de p1 en la lista de sus selecciones
+            
+            filled_fields.append(int(x)) #  coloca los numeros de los campos ya llenos
+            
+            fetch_field_and_fill(p1_selections, p2_selections, p1_sim, p2_sim,first_game) #  obtiene el campo y lo rellena
+            
             turn = 2
             first_game = False
             
-            
-            if counter_1 == 3:
-                print("\nCheckeamos si 1 gano.")               
+            # comprobamos si ya gano.
+            if counter == 6 or counter == 9:
                 if winner(p1_selections) == True:
                     
-                    who_win = 1
+                        who_win = 1
                    
-        elif turn == 2 and who_win == 0:
+        elif turn == 2 and  who_win == 0:
             
             print("\nTurno de jugador 2")
-            counter_2 += 1
+         
             y = (recibir_campo(turn, filled_fields))
             p2_selections.append(int(y))
             filled_fields.append(int(y))
             fetch_field_and_fill(p1_selections, p2_selections, p1_sim, p2_sim,first_game)
             
-            if counter_2 == 3:
+            # comprobamos si ya gano. 
+            if counter == 6 or counter == 9:
                 
                 if winner(p2_selections) == True:
                     
-                    who_win = 2
+                        who_win = 1
             
             turn = 1
-            
             
         if who_win == 1 or who_win == 2:
             
             show_winner(who_win)
             ask = 1
         
-        elif who_win == 0 and (counter_1 == 3 or counter_2 == 3):
+        elif who_win == 0 and (counter == 9):
             
             print("Empate")
             ask = 1
             
-            
-        if (counter_1 == 3 or counter_2 == 3) and ask:
+        if (counter == 9) and ask:
             
             print("\n\nQuieres seguir jugando?[ Y: seguir jugando/ N or other character: terminar juego]\n")
 
@@ -118,9 +123,7 @@ def playing(p1_sim, p2_sim):
             else:
             
                 keep_playing = False
-        
-    
-            
+                    
 def validation(field, filled_fields):
 
         """Validacion de que el campo seleccionado no pertenezca a los campos ya llenos"""
@@ -184,20 +187,31 @@ def fetch_field_and_fill(fieldsp1, fieldsp2, simbolp1, simbolp2, first_play = Tr
         #print(fields)
 
 def winner(selections):
+    
+    
     """A partir del las selecciones, determinar si ganó"""
     selections.sort()
     
+        # -> horizontal lines
+        # 1 2 3 - 4 5 6 - 7 8 9   
+   
     if selections[0] == 1 or selections[0] == 4 or selections[0] == 7:
         
         if (selections[1] == selections[0] + 1) and (selections[2] == selections[1] + 1):
             
             return True
-        
+    
+    # -> vertical lines
+    # 1 4 7 - 2 5 8 - 3 6 9 
     elif selections[1] == selections[0] + 3:
         
         if ( selections[2] == selections[1] + 3 ):    
             
             return True
+    
+    # -> diagonals 
+    # 1 5 9 - 3 5 7
+    # ! ERROR  in diagonals, correct the logic.
     
     elif (selections[0] == 1 and selections[1] == 5 and selections[2] == 9) or (selections[0] == 3 and selections[1] == 5 and selections[2] == 7):
         
