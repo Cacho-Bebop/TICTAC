@@ -1,5 +1,10 @@
 from random import randint, seed
 
+#### the engine of the program.
+
+# ! issues: broken UI when filling a field.
+
+
 def display_tictac_layout():
     
     row1 = [7,8,9]
@@ -17,9 +22,7 @@ def playing(p1_sim, p2_sim):
     keep_playing = True
         
     ### input of the players 
-    inp_p1 = 0
-    
-    inp_p2 = 0
+
     
     
     counter   = 0 # contador de vueltas del loop
@@ -38,6 +41,17 @@ def playing(p1_sim, p2_sim):
     first_game  =   True # ? variable a utilizar para determinar si el juego recien comienza o no
     
     while keep_playing:
+        
+        print("\n\n\n")
+        if first_game:
+          
+            fields = list(range(10))
+            
+            print(f"  {fields[7]}  |  {fields[8]}  |  {fields[9]}\n  {fields[4]}  |  {fields[5]}  |  {fields[6]}\n  {fields[1]}  |  {fields[2]}  |  {fields[3]}")
+            
+            first_game = False
+            
+        
         
         counter += 1
         # turn based input:
@@ -100,13 +114,7 @@ def playing(p1_sim, p2_sim):
             stay = input("> ")
             
             if(stay.casefold() == 'Y'.casefold()):
-                
-                inp_p1 = 0
-    
-                inp_p2 = 0
-    
-                counter_1 = 0
-                counter_2 = 0
+
                 
                 ### guardamos las selecciones de los jugadores
                 p1_selections = [] 
