@@ -1,3 +1,4 @@
+from tic_tac_layaout import playing
 ####TIC-TAC-TOE GAME####
 
 # players:
@@ -58,5 +59,6 @@ P1_choice = select_playerONE()
 P2_choice = determination(P1_choice)
 # -> se muestran los resultados
 print_selected_simbols()
+playing(P1_choice, P2_choice)
     
     

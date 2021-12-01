@@ -10,7 +10,12 @@ def display_tictac_layout():
 
 #display_tictac_layout()
 
-def playing(p1_sim, p2_sim):
+def playing2(p1_sim, p2_sim):
+    
+    q = ''
+    fields = ['','','','','','','','','','','']
+    
+    layout = f"  {fields[7]}  |  {fields[8]}  |  {fields[9]}\n  {fields[4]}  |  {fields[5]}  |  {fields[6]}\n  {fields[1]}  |  {fields[2]}  |  {fields[3]}"
     
 
     """The game running"""
@@ -46,7 +51,8 @@ def playing(p1_sim, p2_sim):
             x = (recibir_campo(turn, filled_fields))
             p1_selections.append(int(x))
             filled_fields.append(int(x))
-            fetch_field_and_fill(p1_selections, p2_selections, p1_sim, p2_sim,first_game)
+            fields[int(x)+1] = p1_sim
+            display_layout(layout)
             turn = 2
             first_game = False
             
@@ -63,7 +69,9 @@ def playing(p1_sim, p2_sim):
             y = (recibir_campo(turn, filled_fields))
             p2_selections.append(int(y))
             filled_fields.append(int(y))
-            fetch_field_and_fill(p1_selections, p2_selections, p1_sim, p2_sim,first_game)
+            fields[int(y)+1] = p2_sim
+            display_layout(layout)
+            turn = 1
             
             if counter_2 == 3:
                 
@@ -71,7 +79,7 @@ def playing(p1_sim, p2_sim):
                     
                     who_win = 2
             
-            turn = 1
+          
             
             
         if (counter_1 == 3 and counter_2 == 3) and who_win == 0:
@@ -152,25 +160,11 @@ def recibir_campo(turn, filled_fields):
         # Una vez verificada la validez de la seleccion, devolverla
         return  inp
 
-def fetch_field_and_fill(fieldsp1, fieldsp2, simbolp1, simbolp2, first_play = True):
 
-        """Funcion encargada de rellenar el campo ingresadoss, y rellenar con el simbolo"""
-
-        # si no es el primer juego entonces checkea los campos ya llenos
-       
-        x = ''
-        fields = list( '' for x in range(10))
-        
-        for field in sorted(fieldsp1):
-            
-            fields[int(field)] = simbolp1
-        
-        for field in sorted(fieldsp2):
-                
-            fields[int(field)] = simbolp2
-        
-        print(f"  {fields[7]}  |  {fields[8]}  |  {fields[9]}\n  {fields[4]}  |  {fields[5]}  |  {fields[6]}\n  {fields[1]}  |  {fields[2]}  |  {fields[3]}")
-                                                
+def display_layout(layout):
+    
+    print(layout)
+                    
         #print(fields)
 
 def winner(selections):
