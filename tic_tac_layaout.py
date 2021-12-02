@@ -1,8 +1,11 @@
 from random import randint, seed
-
+from os import *
 #### the engine of the program.
 
-# ! issues: broken UI when filling a field.
+
+def clear():
+    
+    system.os('clear')
 
 
 def display_tictac_layout():
@@ -42,7 +45,7 @@ def playing(p1_sim, p2_sim):
     
     while keep_playing:
         
-        print("\n\n\n")
+        print("\n\n")
         if first_game:
           
             fields = list(range(10))
@@ -176,13 +179,13 @@ def recibir_campo(turn, filled_fields):
         return  inp
 
 def fetch_field_and_fill(fieldsp1, fieldsp2, simbolp1, simbolp2, first_play = True):
-
+    
         """Funcion encargada de rellenar el campo ingresadoss, y rellenar con el simbolo"""
 
         # si no es el primer juego entonces checkea los campos ya llenos
        
         x = ''
-        fields = list( '' for x in range(10))
+        fields = list( ' ' for x in range(10))
         
         for field in sorted(fieldsp1):
             
@@ -192,8 +195,15 @@ def fetch_field_and_fill(fieldsp1, fieldsp2, simbolp1, simbolp2, first_play = Tr
                 
             fields[int(field)] = simbolp2
         
-        print(f"  {fields[7]}  |  {fields[8]}  |  {fields[9]}\n  {fields[4]}  |  {fields[5]}  |  {fields[6]}\n  {fields[1]}  |  {fields[2]}  |  {fields[3]}")
-                                                
+        
+ 
+        
+        
+        # print(f"  {fields[7]}  |  {fields[8]}  |  {fields[9]}\n  {fields[4]}  |  {fields[5]}  |  {fields[6]}\n  {fields[1]}  |  {fields[2]}  |  {fields[3]}")
+                    
+        print(fields[7] + '|' + fields[8] + '|' + fields[9])
+        print(fields[4] + '|' + fields[5] + '|' + fields[6])
+        print(fields[1] + '|' + fields[2] + '|' + fields[3])                            
         #print(fields)
 
 def winner(selections):
