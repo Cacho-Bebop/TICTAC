@@ -1,4 +1,4 @@
-from tic_tac_layaout import playing
+from motor import playing
 ####TIC-TAC-TOE GAME####
 
 # players:
@@ -38,6 +38,7 @@ def determination(p1_choice):
         return 'O'
     
     else:
+        
         return 'X'
 
 

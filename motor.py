@@ -1,12 +1,10 @@
-from random import randint, seed
-from os import *
+import os
+from validation import inp_f
 #### the engine of the program.
-
 
 def clear():
     
-    system.os('clear')
-
+    os.system('clear')
 
 def display_tictac_layout():
     
@@ -20,14 +18,11 @@ def display_tictac_layout():
 
 def playing(p1_sim, p2_sim):
     
-
     """The game running"""
     keep_playing = True
         
     ### input of the players 
 
-    
-    
     counter   = 0 # contador de vueltas del loop
     
     p1_selections = [] 
@@ -53,17 +48,12 @@ def playing(p1_sim, p2_sim):
             print(f"  {fields[7]}  |  {fields[8]}  |  {fields[9]}\n  {fields[4]}  |  {fields[5]}  |  {fields[6]}\n  {fields[1]}  |  {fields[2]}  |  {fields[3]}")
             
             first_game = False
-            
-        
         
         counter += 1
         # turn based input:
         if turn == 1 and who_win == 0 :
             
-            print("\nTurno de jugador 1")
-      
-            
-            x = (recibir_campo(turn, filled_fields)) #  ask user an input, puts in a not filled field
+            x = (inp_f(turn, filled_fields)) #  ask user an input, puts in a not filled field
             
             p1_selections.append(int(x)) #  pone la seleccion de p1 en la lista de sus selecciones
             
@@ -81,10 +71,8 @@ def playing(p1_sim, p2_sim):
                         who_win = 1
                    
         elif turn == 2 and  who_win == 0:
-            
-            print("\nTurno de jugador 2")
-         
-            y = (recibir_campo(turn, filled_fields))
+                     
+            y = (inp_f(turn, filled_fields))
             p2_selections.append(int(y))
             filled_fields.append(int(y))
             fetch_field_and_fill(p1_selections, p2_selections, p1_sim, p2_sim,first_game)
@@ -94,8 +82,8 @@ def playing(p1_sim, p2_sim):
                 
                 if winner(p2_selections) == True:
                     
-                        who_win = 1
-            
+                        who_win = 2
+                        
             turn = 1
             
         if who_win == 1 or who_win == 2:
@@ -118,7 +106,6 @@ def playing(p1_sim, p2_sim):
             
             if(stay.casefold() == 'Y'.casefold()):
 
-                
                 ### guardamos las selecciones de los jugadores
                 p1_selections = [] 
     
@@ -137,49 +124,9 @@ def playing(p1_sim, p2_sim):
             
                 keep_playing = False
                     
-def validation(field, filled_fields):
-
-        """Validacion de que el campo seleccionado no pertenezca a los campos ya llenos"""
-
-        if field in filled_fields:
-            
-            return False
-        
-        else:
-            
-            return True
-                     
-def recibir_campo(turn, filled_fields):
-    
-    """funcion encargada de manejar el turno / recibir entrada / corroborar que sea valida"""
-        
-    # mostramos de quien es el turno
-    print(f"Is turn of the player {turn}")
-    
-    while True:
-        
-        # muestra informacion necesaria
-        inp = input("\nIndica con numeros del 1 al 9 en cual campo deseas marcar\n->")
-        
-        # verificacion de que el dato pasado sea un digito 
-        while (inp.isdigit() == False or validation(inp, filled_fields) == False):
-            
-            inp = input("\nIndica con numeros del 1 al 9 en cual campo deseas marcar\n-> ")
-
-
-            seed(101)
-            # si es 0 a inp le asignamos un numero random
-            if inp == 0:
-
-                while validation(inp, filled_fields) == False:
-                    
-                        inp = randint(1,9)
-                            
-        # Una vez verificada la validez de la seleccion, devolverla
-        return  inp
-
 def fetch_field_and_fill(fieldsp1, fieldsp2, simbolp1, simbolp2, first_play = True):
-    
+
+        clear()
         """Funcion encargada de rellenar el campo ingresadoss, y rellenar con el simbolo"""
 
         # si no es el primer juego entonces checkea los campos ya llenos
@@ -194,11 +141,7 @@ def fetch_field_and_fill(fieldsp1, fieldsp2, simbolp1, simbolp2, first_play = Tr
         for field in sorted(fieldsp2):
                 
             fields[int(field)] = simbolp2
-        
-        
- 
-        
-        
+         
         # print(f"  {fields[7]}  |  {fields[8]}  |  {fields[9]}\n  {fields[4]}  |  {fields[5]}  |  {fields[6]}\n  {fields[1]}  |  {fields[2]}  |  {fields[3]}")
                     
         print(fields[7] + '|' + fields[8] + '|' + fields[9])
@@ -215,24 +158,28 @@ def winner(selections):
         # -> horizontal lines
         # 1 2 3 - 4 5 6 - 7 8 9   
    
-    if selections[0] == 1 and selections[1] == 2 and selections[2] == 3:
+    if (selections[0] == 1) and (selections[1] == 2) and (selections[2] == 3):
+            
             return True
     
-    elif selections[0] == 4 and selections[1] == 5 and selections[2] == 6:
-        return True
+    elif (selections[0] == 4) and (selections[1] == 5) and (selections[2] == 6):
+            
+            return True
     
-    elif selections[0] == 7 and selections[1] == 8 and selections[2] == 9:
-        return True
+    elif (selections[0] == 7) and (selections[1] == 8) and (selections[2] == 9) :
+            return True
     # -> vertical lines
     # 1 4 7 - 2 5 8 - 3 6 9 
-    elif selections[0] == 1 and selections[1] == 4 and selections[2] == 7:
-        return True
+    elif (selections[0] == 1) and (selections[1] == 4) and (selections[2] == 7):
+            
+            return True
 
-    elif selections[0] == 2 and selections[1] == 5 and selections[2] == 8:
-        return True
+    elif (selections[0] == 2) and (selections[1] == 5) and (selections[2] == 8):
+            
+            return True
     
-    elif selections[0] == 3 and selections[1] == 6 and selections[2] == 9:
-        return True
+    elif (selections[0] == 3) and (selections[1] == 6) and (selections[2] == 9):
+            return True
     # -> diagonals 
     # 1 5 9 - 3 5 7
    
@@ -243,7 +190,6 @@ def winner(selections):
     else:
         
         return False    
-
 
 def show_winner(winner):
     
