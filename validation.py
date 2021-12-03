@@ -6,7 +6,7 @@ def validation(field, filled_fields):
 
         for num in filled_fields:
             
-            if ( int(field) == int(num) ) or (num >= 10) or (num < 0):
+            if ( int(field) == int(num) ):
                     
                     return False
         
@@ -21,25 +21,33 @@ def inp_f(turn, filled_fields):
     print(f"Turno de jugador {turn}.")
     
     checker = False # flag -> True if the validation is successful
-    
+    wrong_field = False
     
     while checker == False:
         
         # muestra informacion necesaria
         inp = input("\nIndica con numeros del 1 al 9 en cual campo deseas marcar\n->")
-        
-        
-                
+         
         # verificacion de que el dato pasado sea un digito 
         while inp.isdigit() == False:
             
             inp = input("\nIndica con numeros del 1 al 9 en cual campo deseas marcar\n-> ")
         
-        if int(inp) < 1:
-           
-           inp = randint(1,8)
         
-          
+        if int(inp) <= 0 or (int(inp) >= 10):
+            
+            wrong_field = True
+        
+        
+        while wrong_field == True: 
+             
+            inp = randint(1,9)
+            
+            if validation(inp,filled_fields) == True or len(filled_fields) == 9:
+                
+               break
+            
+              
         checker = validation(inp, filled_fields)
 
         if checker == False:

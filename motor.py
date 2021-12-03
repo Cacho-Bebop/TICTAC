@@ -183,7 +183,7 @@ def winner(selections):
     # -> diagonals 
     # 1 5 9 - 3 5 7
    
-    elif (selections[0] == 1 and selections[1] == 5 and selections[2] == 9) or (selections[0] == 3 and selections[1] == 5 and selections[2] == 7):
+    elif ((selections[0] == 1) and (selections[1] == 5) and (selections[2] == 9)) or ((selections[0] == 3) and (selections[1] == 5) and (selections[2] == 7)):
         
         return True
     
