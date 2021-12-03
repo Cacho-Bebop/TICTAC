@@ -1,5 +1,6 @@
 import os
 from validation import inp_f
+from winner import winner
 #### the engine of the program.
 
 def clear():
@@ -86,7 +87,7 @@ def playing(p1_sim, p2_sim):
                         
             turn = 1
             
-        if who_win == 1 or who_win == 2:
+        if who_win == 1 or (who_win == 2):
             
             counter = 9
             show_winner(who_win)
@@ -149,47 +150,47 @@ def fetch_field_and_fill(fieldsp1, fieldsp2, simbolp1, simbolp2, first_play = Tr
         print(fields[1] + '|' + fields[2] + '|' + fields[3])                            
         #print(fields)
 
-def winner(selections):
+# def winner(selections):
     
     
-    """A partir del las selecciones, determinar si ganó"""
-    selections.sort()
+#     """A partir del las selecciones, determinar si ganó"""
+#     selections.sort()
     
-        # -> horizontal lines
-        # 1 2 3 - 4 5 6 - 7 8 9   
+#         # -> horizontal lines
+#         # 1 2 3 - 4 5 6 - 7 8 9   
    
-    if (selections[0] == 1) and (selections[1] == 2) and (selections[2] == 3):
+#     if (selections[0] == 1) and (selections[1] == 2) and (selections[2] == 3):
             
-            return True
+#             return True
     
-    elif (selections[0] == 4) and (selections[1] == 5) and (selections[2] == 6):
+#     elif (selections[0] == 4) and (selections[1] == 5) and (selections[2] == 6):
             
-            return True
+#             return True
     
-    elif (selections[0] == 7) and (selections[1] == 8) and (selections[2] == 9) :
-            return True
-    # -> vertical lines
-    # 1 4 7 - 2 5 8 - 3 6 9 
-    elif (selections[0] == 1) and (selections[1] == 4) and (selections[2] == 7):
+#     elif (selections[0] == 7) and (selections[1] == 8) and (selections[2] == 9) :
+#             return True
+#     # -> vertical lines
+#     # 1 4 7 - 2 5 8 - 3 6 9 
+#     elif (selections[0] == 1) and (selections[1] == 4) and (selections[2] == 7):
             
-            return True
+#             return True
 
-    elif (selections[0] == 2) and (selections[1] == 5) and (selections[2] == 8):
+#     elif (selections[0] == 2) and (selections[1] == 5) and (selections[2] == 8):
             
-            return True
+#             return True
     
-    elif (selections[0] == 3) and (selections[1] == 6) and (selections[2] == 9):
-            return True
-    # -> diagonals 
-    # 1 5 9 - 3 5 7
+#     elif (selections[0] == 3) and (selections[1] == 6) and (selections[2] == 9):
+#             return True
+#     # -> diagonals 
+#     # 1 5 9 - 3 5 7
    
-    elif ((selections[0] == 1) and (selections[1] == 5) and (selections[2] == 9)) or ((selections[0] == 3) and (selections[1] == 5) and (selections[2] == 7)):
+#     elif ((selections[0] == 1) and (selections[1] == 5) and (selections[2] == 9)) or ((selections[0] == 3) and (selections[1] == 5) and (selections[2] == 7)):
         
-        return True
+#         return True
     
-    else:
+#     else:
         
-        return False    
+#         return False    
 
 def show_winner(winner):
     
